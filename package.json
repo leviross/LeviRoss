@@ -1,0 +1,23 @@
+{
+  "name": "leviross",
+  "version": "1.0.0",
+  "description": "My Personal Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leviross/leviross.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leviross/leviross/issues"
+  },
+  "homepage": "https://github.com/leviross/leviross",
+  "dependencies": {
+    "ejs": "^2.2.4",
+    "express": "^4.11.2"
+  }
+}

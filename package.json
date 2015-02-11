@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/leviross/leviross",
   "dependencies": {
+    "body-parser": "^1.11.0",
     "ejs": "^2.2.4",
-    "express": "^4.11.2"
+    "express": "^4.11.2",
+    "sendgrid": "1.6.0"
   }
 }

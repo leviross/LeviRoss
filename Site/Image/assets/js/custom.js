@@ -31,17 +31,13 @@
 		});
 
 		/* ---------------------------------------------- /*
-		 * Background images
+		 * Background image
 		/* ---------------------------------------------- */
 
-		$('#intro').backstretch([
-			'assets/images/bg3.jpg',
-			'assets/images/bg4.jpg',
-			'assets/images/bg2.jpg'
-		], {duration: 3000, fade: 750});
+		$('#intro').backstretch(['assets/images/bg4.jpg']);
 
 		/* ---------------------------------------------- /*
- 		 * Navbar
+		 * Navbar
 		/* ---------------------------------------------- */
 
 		var navbar = $('.navbar');
@@ -207,8 +203,10 @@
 
 })(jQuery);
 
+
 $('#levi-link').on('click',function(e){
 	e.preventDefault();
 	//window.scrollTop();
 	$('html, body').animate({scrollTop:0}, 600);
 });
+

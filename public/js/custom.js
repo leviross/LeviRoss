@@ -35,9 +35,9 @@
 		/* ---------------------------------------------- */
 
 		$('#intro').backstretch([
-			'assets/images/bg3.jpg',
-			'assets/images/bg4.jpg',
-			'assets/images/bg2.jpg'
+			'assets/images/sunset.jpg',
+			'assets/images/rockymt.jpg',
+			'assets/images/bg3.jpg'
 		], {duration: 3000, fade: 750});
 
 		/* ---------------------------------------------- /*

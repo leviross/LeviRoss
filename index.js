@@ -37,13 +37,15 @@ app.post("/sendContact",function(req,res){
     };
     sendgrid.send(payload, function(err, json) {
         if(err){
+            res.render('index',{error:err});
             return console.error(err);
         }else{
+            res.render('index',{error:false});
             console.log(json);
         }
 
     });
-    res.redirect("/");
+    //res.redirect("/");
 
 });
 

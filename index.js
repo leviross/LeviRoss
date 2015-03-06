@@ -16,6 +16,10 @@ app.get("/resume", function(req,res){
     res.render("resume");
 });
 
+app.get("/emailSent",function(req,res){
+    res.render("email_sent");
+})
+
 app.post("/sendContact",function(req,res){
     var email = new sendgrid.Email();
     //needs body parse to work...
@@ -25,8 +29,6 @@ app.post("/sendContact",function(req,res){
 
     console.log(req.body);
     //todo: send e-mail using send grid here
-    //res.send({message:'Your e-mail has been sent.',sendstatus:true});
-    //res.send({message:'There was an error sending your e-mail.',sendstatus:false});
 
     var payload = {
         to: 'levross@gmail.com',
@@ -37,11 +39,13 @@ app.post("/sendContact",function(req,res){
     };
     sendgrid.send(payload, function(err, json) {
         if(err){
-            res.render('index',{error:err});
+            //res.render('index',{error:err});
             return console.error(err);
         }else{
-            res.render('index',{error:false});
+            //redirecting to same page with new route, sweetalert pops up on load
+            //total hack job, but does the trick
             console.log(json);
+            res.redirect("/emailSent");
         }
 
     });

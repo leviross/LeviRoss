@@ -18,6 +18,10 @@ app.get("/resume", function(req,res){
 
 app.get("/emailSent",function(req,res){
     res.render("email_sent");
+});
+
+app.get("/emailNotSent",function(req,res){
+    res.render("email_not_sent");
 })
 
 app.post("/sendContact",function(req,res){
@@ -40,6 +44,7 @@ app.post("/sendContact",function(req,res){
     sendgrid.send(payload, function(err, json) {
         if(err){
             //res.render('index',{error:err});
+            res.redirect("/emailNotSent");
             return console.error(err);
         }else{
             //redirecting to same page with new route, sweetalert pops up on load

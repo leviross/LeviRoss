@@ -1,7 +1,11 @@
 var express = require('express');
+var dotenv = require('dotenv');
+dotenv.load();
 var app = express();
 var bodyParser = require('body-parser');
-var sendgrid  = require('sendgrid')('leviross', 'Fuckit123');
+var sendgrid_username = process.env.SENDGRID_USERNAME;
+var sendgrid_password = process.env.SENDGRID_PASSWORD;
+var sendgrid  = require('sendgrid')(sendgrid_username, sendgrid_password);
 
 app.set("view engine", "ejs");
 

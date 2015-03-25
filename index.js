@@ -50,7 +50,7 @@ app.post("/sendContact",function(req,res){
             //res.render('index',{error:err});
             //res.redirect("/emailNotSent");
             //return console.error(err);
-            res.send(err);
+            throw(err);
         }else{
             //redirecting to same page with new route, sweetalert pops up on load
             //total hack job, but does the trick

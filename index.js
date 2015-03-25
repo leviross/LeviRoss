@@ -20,12 +20,12 @@ app.get("/resume", function(req,res){
     res.render("resume");
 });
 
-app.get("/emailSent",function(req,res){
-    res.render("email_sent");
+app.get("/sent",function(req,res){
+    res.render("sent");
 });
 
-app.get("/emailNotSent",function(req,res){
-    res.render("email_not_sent");
+app.get("/nosent",function(req,res){
+    res.render("nosent");
 })
 
 app.post("/sendContact",function(req,res){

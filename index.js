@@ -5,6 +5,7 @@ var app = express();
 var bodyParser = require('body-parser');
 var sendgrid_username = process.env.SENDGRID_USERNAME;
 var sendgrid_password = process.env.SENDGRID_PASSWORD;
+var sendgrid_to_email = process.env.SENDGRID_TO_EMAIL;
 var sendgrid  = require('sendgrid')(sendgrid_username, sendgrid_password);
 
 app.set("view engine", "ejs");
@@ -39,7 +40,7 @@ app.post("/sendContact",function(req,res){
     //todo: send e-mail using send grid here
 
     var payload = {
-        to: 'levross@gmail.com',
+        to: sendgrid_to_email,
         subject: 'New Email from leviross.com',
         from: fromEmail,
         name: name,

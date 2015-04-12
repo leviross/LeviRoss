@@ -1,6 +1,6 @@
-var express = require('express');
 var dotenv = require('dotenv');
 dotenv.load();
+var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 var sendgrid_username = process.env.SENDGRID_USERNAME;

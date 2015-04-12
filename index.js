@@ -49,8 +49,8 @@ app.post("/sendContact",function(req,res){
     sendgrid.send(payload, function(err, json) {
         if(err){
             //res.render('index',{error:err});
-            //res.redirect("/nosent");
-            throw(err);
+            res.redirect("/nosent");
+            //throw(err);
             //return console.error(err);
         }else{
             //redirecting to same page with new route, sweetalert pops up on load
@@ -60,7 +60,6 @@ app.post("/sendContact",function(req,res){
         }
 
     });
-    //res.redirect("/");
 
 });
 

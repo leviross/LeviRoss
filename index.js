@@ -31,13 +31,11 @@ app.get("/nosent",function(req,res){
 
 app.post("/sendContact",function(req,res){
     var email = new sendgrid.Email();
-    //needs body parse to work...
     var fromEmail = req.body.c_email;
     var message = req.body.c_message;
     var name = req.body.c_name;
 
     console.log(req.body);
-    //todo: send e-mail using send grid here
 
     var payload = {
         to: sendgrid_to_email,
@@ -48,10 +46,8 @@ app.post("/sendContact",function(req,res){
     };
     sendgrid.send(payload, function(err, json) {
         if(err){
-            //res.render('index',{error:err});
+            console.log(err);
             res.redirect("/nosent");
-            //throw(err);
-            //return console.error(err);
         }else{
             //redirecting to same page with new route, sweetalert pops up on load
             //total hack job, but does the trick

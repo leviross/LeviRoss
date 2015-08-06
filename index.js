@@ -47,7 +47,8 @@ app.post("/sendContact",function(req,res){
     sendgrid.send(payload, function(err, json) {
         if(err){
             console.log(err);
-            res.redirect("/nosent");
+            //res.redirect("/nosent");
+            res.send(err);
         }else{
             //redirecting to same page with new route, sweetalert pops up on load
             //total hack job, but does the trick

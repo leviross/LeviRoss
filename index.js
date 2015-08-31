@@ -56,8 +56,8 @@ app.post("/sendContact",function(req, res){
     transporter.sendMail(mailOptions, function (err, info) {
         if(err) console.log(err);
         console.log("Message sent: " + info);
-        //res.json(info);
-        res.redirect("/sent");
+        res.json(info);
+        //res.redirect("/sent");
     });
 
 

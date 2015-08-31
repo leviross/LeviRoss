@@ -3,6 +3,7 @@ dotenv.load();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var nodemailer = require('nodemailer');
 var sendgrid_username = process.env.SENDGRID_USERNAME;
 var sendgrid_password = process.env.SENDGRID_PASSWORD;
 var sendgrid_to_email = process.env.SENDGRID_TO_EMAIL;
@@ -29,34 +30,59 @@ app.get("/nosent",function(req,res){
     res.render("nosent");
 })
 
-app.post("/sendContact",function(req,res){
-    var email = new sendgrid.Email();
+app.post("/sendContact",function(req, res){
+
+    //var email = new sendgrid.Email();
     var fromEmail = req.body.c_email;
     var message = req.body.c_message;
     var name = req.body.c_name;
 
-    console.log(req.body);
+    var transporter = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+            user: sendgrid_to_email,
+            pass: sendgrid_password
+        }
+    });
 
-    var payload = {
+    var mailOptions = {
+        from: fromEmail,
         to: sendgrid_to_email,
         subject: 'New Email from leviross.com',
-        from: fromEmail,
-        name: name,
-        text: message
-    };
-    sendgrid.send(payload, function(err, json) {
-        if(err){
-            console.log(err);
-            //res.redirect("/nosent");
-            res.send(err);
-        }else{
-            //redirecting to same page with new route, sweetalert pops up on load
-            //total hack job, but does the trick
-            console.log(json);
-            res.redirect("/sent");
-        }
+        text: message,
+        html: ""
+    }
 
+    transporter.sendMail(mailOptions, function (err, info) {
+        if(err) console.log(err);
+        console.log("Message sent: " + info);
+        //res.json(info);
+        res.redirect("/sent");
     });
+
+
+    
+
+    // var payload = {
+    //     to: sendgrid_to_email,
+    //     subject: 'New Email from leviross.com',
+    //     from: fromEmail,
+    //     name: name,
+    //     text: message
+    // };
+    // sendgrid.send(payload, function(err, json) {
+    //     if(err){
+    //         console.log(err);
+    //         //res.redirect("/nosent");
+    //         res.json(err);
+    //     }else{
+    //         //redirecting to same page with new route, sweetalert pops up on load
+    //         //total hack job, but does the trick
+    //         console.log(json);
+    //         res.redirect("/sent");
+    //     }
+
+    // });
 
 });
 

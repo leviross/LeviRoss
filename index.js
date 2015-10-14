@@ -40,7 +40,7 @@ app.post("/sendContact",function(req, res){
     console.log(req.body);
 
     var transporter = nodemailer.createTransport(smtpTransport({
-        service: "gmail",
+        service: "Gmail",
         auth: {
             user: sendgrid_to_email,
             pass: sendgrid_password

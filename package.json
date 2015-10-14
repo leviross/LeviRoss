@@ -21,7 +21,7 @@
     "dotenv": "0.5.1",
     "ejs": "^2.2.4",
     "express": "^4.11.2",
-    "nodemailer": "^1.4.0",
+    "nodemailer": "0.5.15",
     "sendgrid": "1.6.0"
   }
 }

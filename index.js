@@ -39,6 +39,7 @@ app.post("/sendContact",function(req, res){
 
     var transporter = nodemailer.createTransport({
         service: "Gmail",
+        debug: true,
         auth: {
             user: sendgrid_to_email,
             pass: sendgrid_password
@@ -55,6 +56,7 @@ app.post("/sendContact",function(req, res){
 
     transporter.sendMail(mailOptions, function (err, info) {
         if(err) {
+            console.log(err);
             res.send(err);
         }else {
             console.log("Message sent: " + info);

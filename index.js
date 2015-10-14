@@ -38,14 +38,14 @@ app.post("/sendContact",function(req, res){
     var message = req.body.c_message;
     var name = req.body.c_name;
     console.log(req.body);
-
-    var transporter = nodemailer.createTransport(smtpTransport({
+    var options = {
         service: "Gmail",
         auth: {
-            user: sendgrid_to_email,
+            user: sendgrid_username,
             pass: sendgrid_password
         }
-    }));
+    }
+    var transporter = nodemailer.createTransport(smtpTransport(options));
 
     var mailOptions = {
         from: fromEmail,

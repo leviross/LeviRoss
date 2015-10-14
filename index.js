@@ -37,7 +37,7 @@ app.post("/sendContact",function(req, res){
     var message = req.body.c_message;
     var name = req.body.c_name;
 
-    var transporter = nodemailer.createTransport({
+    var transporter = nodemailer.createTransport("SMTP", {
         service: "Gmail",
         debug: true,
         auth: {

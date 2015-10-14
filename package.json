@@ -22,6 +22,7 @@
     "ejs": "^2.2.4",
     "express": "^4.11.2",
     "nodemailer": "^1.8.0",
+    "nodemailer-smtp-transport": "^1.0.3",
     "sendgrid": "1.6.0"
   }
 }

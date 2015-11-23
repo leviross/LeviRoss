@@ -37,6 +37,7 @@ app.post("/sendContact",function(req, res){
     var fromEmail = req.body.c_email;
     var message = req.body.c_message;
     var name = req.body.c_name;
+    
     console.log(req.body);
     var options = {
         service: "Gmail",

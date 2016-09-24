@@ -3,6 +3,8 @@
 	/* ---------------------------------------------- /*
 	 * Preloader
 	/* ---------------------------------------------- */
+    // logging the window object to test if a propery was appended coming from a diff domain
+    console.log(window);
 
 	$(window).load(function() {
 		$('#status').fadeOut();
@@ -37,7 +39,7 @@
 		$('#intro').backstretch([
 			'assets/images/sunset.jpg',
 			'assets/images/rockymt.jpg',
-			'assets/images/bg3.jpg'
+			'assets/images/seattle_night.jpg'
 		], {duration: 3000, fade: 750});
 
 		/* ---------------------------------------------- /*

@@ -335,7 +335,7 @@ a,
 
 .section, .callout {
 	position: relative;
-	padding: 120px 0;
+	padding: 20px 0 0 0;
 }
 
 .callout {
@@ -343,7 +343,7 @@ a,
 }
 
 .headline {
-	margin: 0 0 60px;
+	margin: 0 0 30px;
 }
 
 .headline p {

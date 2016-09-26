@@ -19,7 +19,6 @@
   "dependencies": {
     "body-parser": "^1.11.0",
     "dotenv": "0.5.1",
-    "ejs": "^2.2.4",
     "express": "^4.11.2",
     "nodemailer": "^1.8.0",
     "nodemailer-smtp-transport": "^1.0.3",

@@ -1,3 +1,9 @@
 node_modules
 .DS_Store
 .env
+.vs/
+bin/
+ecomm.njsproj
+npm-debug.log
+obj/
+typings/

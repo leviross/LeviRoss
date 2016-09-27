@@ -5,13 +5,19 @@ var app = express();
 var bodyParser = require('body-parser');
 var nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
+
+
 var sendgrid_username = process.env.SENDGRID_USERNAME;
 var sendgrid_password = process.env.SENDGRID_PASSWORD;
 var sendgrid_to_email = process.env.SENDGRID_TO_EMAIL;
+
+
+var sendgrid_api_key = process.env.SENDGRID_API_KEY;// Don't think we need this in app code, this is for the app to actually be able to access Sendgrid in general. 
 var sendgrid = require('sendgrid')(sendgrid_username, sendgrid_password);
+
+
 var router = express.Router();
 
-// app.set("view engine", "html");
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,7 +46,7 @@ app.get("/nosent",function(req,res){
     res.render("nosent");
 })
 
-app.post("/sendContact",function(req, res){
+app.post("/sendContactOLD",function(req, res){
 
     //var email = new sendgrid.Email();
     var fromEmail = req.body.c_email;
@@ -77,68 +83,57 @@ app.post("/sendContact",function(req, res){
         }
     });
 
-    router.post('/employment', function (req, res) {
+});
 
-        var email = new sendgrid.Email({
-            to: sendgrid_to_email,
-            subject: 'New Application from Allevahomecare.org',
-            from: sendgrid_from_email,
-            name: req.body.FirstName + req.body.Lastname,
-            html: "<h4>You received a new application from " + req.body.FirstName + "</h4>"
-        });
+router.post('/sendContact', function (req, res) {
 
-        var base64Data = req.body.Resume.replace(/^data(.*)base64,/, "");
-
-        fs.writeFile(req.body.FileName, base64Data, 'base64', function (err) {
-            if (err) {
-                res.json({ Error: true, FSError: err });
-            } else {
-
-                email.addFile({
-                    filename: req.body.FileName,
-                    path: req.body.FileName
-                });
-
-                sendgrid.send(email, function (error, result) {
-                    if (error) {
-                        console.log("Error from Sendgrid sending the email:\n", error);
-                        res.json(error);
-                    } else {
-                        fs.unlinkSync(req.body.FileName);
-                        console.log(result);
-                        res.send("Application Sent.");
-                    }
-
-                });
-            }
-
-        });
-
+    var email = new sendgrid.Email({
+        to: sendgrid_to_email,
+        subject: 'Message from LeviRoss.com',
+        from: req.body.c_email,
+        name: req.body.c_name,
+        html: "<h4>You received a new message from LeviRoss.com.</h4><p>" + req.body.c_message + "</p>"
     });
 
+    sendgrid.send(email, function (error, result) {
+        if (error) {
+            console.log("Error from Sendgrid sending the email:\n", error);
+            res.json(false);
+        } else {
+            console.log("Email was successful!\n", result);
+            res.json({ status: 1, message: "Thank you for contacting me! I will reply back shortly."});
+        }
 
+    }); 
     
 
-    // var payload = {
-    //     to: sendgrid_to_email,
-    //     subject: 'New Email from leviross.com',
-    //     from: fromEmail,
-    //     name: name,
-    //     text: message
-    // };
-    // sendgrid.send(payload, function(err, json) {
-    //     if(err){
-    //         console.log(err);
-    //         //res.redirect("/nosent");
-    //         res.json(err);
-    //     }else{
-    //         //redirecting to same page with new route, sweetalert pops up on load
-    //         //total hack job, but does the trick
-    //         console.log(json);
-    //         res.redirect("/sent");
-    //     }
 
-    // });
+    //var base64Data = req.body.Resume.replace(/^data(.*)base64,/, "");
+
+    //fs.writeFile(req.body.FileName, base64Data, 'base64', function (err) {
+    //    if (err) {
+    //        res.json({ Error: true, FSError: err });
+    //    } else {
+
+    //        email.addFile({
+    //            filename: req.body.FileName,
+    //            path: req.body.FileName
+    //        });
+
+    //        sendgrid.send(email, function (error, result) {
+    //            if (error) {
+    //                console.log("Error from Sendgrid sending the email:\n", error);
+    //                res.json(error);
+    //            } else {
+    //                fs.unlinkSync(req.body.FileName);
+    //                console.log(result);
+    //                res.send("Application Sent.");
+    //            }
+
+    //        });
+    //    }
+
+    //});
 
 });
 

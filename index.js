@@ -3,8 +3,6 @@ dotenv.load();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var nodemailer = require('nodemailer');
-var smtpTransport = require('nodemailer-smtp-transport');
 
 
 var sendgrid_username = process.env.SENDGRID_USERNAME;

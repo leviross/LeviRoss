@@ -2,7 +2,7 @@
   "name": "leviross",
   "version": "1.0.0",
   "description": "My Personal Portfolio",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,10 +18,8 @@
   "homepage": "https://github.com/leviross/leviross",
   "dependencies": {
     "body-parser": "^1.11.0",
-    "dotenv": "0.5.1",
+    "dotenv": "^0.5.1",
     "express": "^4.11.2",
-    "nodemailer": "^1.8.0",
-    "nodemailer-smtp-transport": "^1.0.3",
-    "sendgrid": "1.6.0"
+    "sendgrid": "^1.6.0"
   }
 }

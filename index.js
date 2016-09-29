@@ -87,10 +87,10 @@ router.post('/sendContact', function (req, res) {
 
     var email = new sendgrid.Email({
         to: sendgrid_to_email,
-        subject: 'Message from LeviRoss.com',
-        from: req.body.c_email,
+        subject: "LeviRoss.com - New message from " + req.body.c_name,
+        from: sendgrid_to_email,
         name: req.body.c_name,
-        html: "<h4>You received a new message from LeviRoss.com.</h4><p>" + req.body.c_message + "</p>"
+        html: "<h4>LeviRoss.com - New message from " + req.body.c_name + " </h4><p>" + req.body.c_message + "</p><br /><p>" + req.body.c_email + "</p>"
     });
 
     sendgrid.send(email, function (error, result) {
@@ -105,7 +105,7 @@ router.post('/sendContact', function (req, res) {
     }); 
     
 
-
+    // To allow attachments, use this below code
     //var base64Data = req.body.Resume.replace(/^data(.*)base64,/, "");
 
     //fs.writeFile(req.body.FileName, base64Data, 'base64', function (err) {

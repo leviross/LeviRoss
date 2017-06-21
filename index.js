@@ -85,25 +85,36 @@ app.post("/sendContactOLD",function(req, res){
 
 router.post('/sendContact', function (req, res) {
 
-    var email = new sendgrid.Email({
-        to: sendgrid_to_email,
-        subject: "LeviRoss.com - New message from " + req.body.c_name,
-        from: sendgrid_to_email,
-        name: req.body.c_name,
-        html: "<h4>LeviRoss.com - New message from " + req.body.c_name + " </h4><p>" + req.body.c_message + "</p><br /><p>" + req.body.c_email + "</p>"
-    });
-
-    sendgrid.send(email, function (error, result) {
-        if (error) {
-            console.log("Error from Sendgrid sending the email:\n", error);
-            res.json(false);
-        } else {
-            console.log("Email was successful!\n", result);
-            res.json({ status: 1, message: "Thank you for contacting me! I will reply back shortly."});
+    var name = req.body.c_name;
+    var counter = 0;
+    for (var i = 0; i < name.length; i++) {
+        if (!isNaN(name[i])) {
+            counter++;
         }
+    }
 
-    }); 
-    
+    if (counter > 5) {
+        res.json({ status: 1, message: "Take a hike spammer. Ain't nobody got time for that!" });
+    } else {
+        var email = new sendgrid.Email({
+            to: sendgrid_to_email,
+            subject: "LeviRoss.com - New message from " + name,
+            from: sendgrid_to_email,
+            name: name,
+            html: "<h4>LeviRoss.com - New message from " + name + " </h4><p>" + req.body.c_message + "</p><br /><p>" + req.body.c_email + "</p>"
+        });
+
+        sendgrid.send(email, function (error, result) {
+            if (error) {
+                console.log("Error from Sendgrid sending the email:\n", error);
+                res.json(false);
+            } else {
+                console.log("Email was successful!\n", result);
+                res.json({ status: 1, message: "Thank you for contacting me! I will reply back shortly." });
+            }
+
+        });   
+    }    
 
     // To allow attachments, use this below code
     //var base64Data = req.body.Resume.replace(/^data(.*)base64,/, "");

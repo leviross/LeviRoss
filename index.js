@@ -3,7 +3,7 @@ dotenv.load();
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-
+const fs = require('fs');
 
 var sendgrid_username = process.env.SENDGRID_USERNAME;
 var sendgrid_password = process.env.SENDGRID_PASSWORD;
@@ -34,6 +34,10 @@ app.get("/nothing", function(req,res){
 });
 app.get("/resume", function(req,res){
     res.render("resume");
+});
+
+router.get('/school', function (req, res) {
+    res.sendFile('school.html', { root: __dirname + '/views' });
 });
 
 app.get("/sent",function(req,res){
